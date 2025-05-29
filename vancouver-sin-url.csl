@@ -1,30 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0">
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text">
   <info>
-    <title>Vancouver sin URL</title>
-    <id>http://www.zotero.org/styles/vancouver-sin-url</id>
-    <link href="http://www.zotero.org/styles/vancouver-sin-url" rel="self"/>
+    <title>Vancouver (no URL)</title>
+    <id>http://www.zotero.org/styles/vancouver-no-url</id>
+    <link href="http://www.zotero.org/styles/vancouver-no-url" rel="self"/>
     <link href="http://www.icmje.org/" rel="documentation"/>
     <author>
-      <name>Adaptado por ChatGPT para Jose</name>
+      <name>Adaptado por ChatGPT</name>
     </author>
     <category citation-format="numeric"/>
     <category field="medicine"/>
-    <summary>Estilo Vancouver modificado sin URL ni etiquetas electrónicas, ideal para libros impresos</summary>
+    <summary>Vancouver style sin URL ni etiquetas electrónicas (ideal para libro impreso)</summary>
     <updated>2025-05-29T00:00:00+00:00</updated>
   </info>
 
-  <locale xml:lang="en">
-    <terms>
-      <term name="et-al">et al</term>
-    </terms>
-  </locale>
-
   <macro name="author">
     <names variable="author">
-      <name initialize-with="." delimiter=", " name-as-sort-order="first"/>
-      <label form="short" prefix=" " text-case="lowercase" suffix="."/>
-      <et-al font-style="italic"/>
+      <name delimiter=", " initialize-with=".">
+        <name-part name="family"/>
+        <name-part name="given" initialize-with="."/>
+      </name>
+      <label form="short" prefix=" " text-case="capitalize-first"/>
     </names>
   </macro>
 
@@ -39,47 +35,34 @@
   <macro name="issued">
     <date variable="issued">
       <date-part name="year"/>
-      <date-part name="month" prefix=" " form="short" strip-periods="true"/>
+      <date-part name="month" form="short" strip-periods="true" prefix=" "/>
       <date-part name="day" prefix=" "/>
     </date>
   </macro>
 
-  <macro name="volume-issue">
-    <group delimiter=";">
-      <group delimiter=" ">
-        <text variable="volume"/>
-        <group>
-          <text value="(" suffix=""/>
-          <text variable="issue"/>
-          <text value=")"/>
-        </group>
-      </group>
+  <macro name="volume-issue-pages">
+    <group delimiter="">
+      <text variable="volume"/>
+      <text value="("/>
+      <text variable="issue"/>
+      <text value=")"/>
+      <text variable="page" prefix=":"/>
     </group>
   </macro>
 
-  <macro name="pages">
-    <text variable="page" prefix=":"/>
-  </macro>
-
-  <citation collapse="citation-number">
-    <sort>
-      <key variable="citation-number"/>
-    </sort>
-    <layout delimiter="," vertical-align="sup">
+  <citation>
+    <layout prefix="[" suffix="]" delimiter=",">
       <text variable="citation-number"/>
     </layout>
   </citation>
 
   <bibliography>
-    <layout hanging-indent="true" delimiter=". ">
-      <text macro="author"/>
-      <text macro="title" prefix=". "/>
+    <layout hanging-indent="true" delimiter=" ">
+      <text macro="author" suffix="."/>
+      <text macro="title" prefix=" "/>
       <text macro="container-title" prefix=" "/>
-      <group delimiter=";">
-        <text macro="issued"/>
-        <text macro="volume-issue"/>
-        <text macro="pages"/>
-      </group>
+      <text macro="issued" prefix=" "/>
+      <text macro="volume-issue-pages" prefix=";"/>
       <text value="."/>
     </layout>
   </bibliography>
